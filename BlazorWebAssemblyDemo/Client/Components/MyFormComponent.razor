@@ -1,0 +1,99 @@
+﻿@using System.ComponentModel.DataAnnotations;
+<h3>MyFormComponent</h3>
+
+<EditForm Model=model
+    OnValidSubmit=ValidFormSubmitted
+    OnInvalidSubmit=InvalidFormSubmitted>
+    <DataAnnotationsValidator />
+    <ValidationSummary />
+    <div class="form-group">
+        <p>
+            <label for="chkBox">Bool Data</label>
+            <InputCheckbox @bind-Value=model.BoolData id="chkBox" class="form-check" />
+
+        </p>
+    </div>
+    <div class="form-group">
+        <p>
+            <label for="date">Date Data</label>
+            <InputDate @bind-Value=model.DateTimeDate id="date" class="form-control" />
+        </p>
+    </div>
+    <div class="form-group">
+        <p>
+            <label for="int">Int Data</label>
+            <InputNumber @bind-Value=model.IntData id="int" class="form-control" />
+        </p>
+    </div>
+    <div class="form-group">
+        <p>
+            <label for="string">String Data</label>
+            <InputText @bind-Value=model.StringData1 id="string" class="form-control" />
+            <ValidationMessage For=@(() => model.StringData1) />
+        </p>
+    </div>
+    <div class="form-group">
+        <p>
+            <label for="string2">Long String Data</label>
+            <InputTextArea @bind-Value=model.StringData2 id="string2" class="form-control" />
+            <ValidationMessage For=@(() => model.StringData2) />
+
+        </p>
+    </div>
+    <div class="form-group">
+        <p>
+            <label for="enum">Enum Data</label>
+            <InputSelect @bind-Value=model.RoleData id="enum" class="form-control">
+                <option value="Admin">Admin</option>
+                <option value="User">User</option>
+                <option value="Editor">Editor</option>
+            </InputSelect>
+        </p>
+    </div>
+    <button class="btn btn-primary">Send</button>
+</EditForm>
+
+@code {
+    TestModel model = new TestModel();
+
+    class TestModel
+    {
+        public bool BoolData { get; set; }
+        public DateTime DateTimeDate { get; set; }
+        [Range(5.0, 10.0, ErrorMessage = "The number must be between 5 and 10")]
+        public int IntData { get; set; }
+        public decimal DecimalData { get; set; }
+        [Required]
+        public string StringData1 { get; set; }
+        [MaxLength(100, ErrorMessage ="Message is too long!")]
+        public string StringData2 { get; set; }
+        public Role RoleData { get; set; } = Role.Editor;
+    }
+
+    enum Role
+    {
+        Admin,
+        User,
+        Editor
+    }
+
+    void SubmitForm(EditContext editContext)
+    {
+        bool isValid = editContext.Validate();
+        if (isValid)
+            Console.WriteLine("Submitting....");
+        else
+            Console.WriteLine("Error...");
+    }
+
+    void ValidFormSubmitted()
+    {
+        Console.WriteLine("ValidFormSubmitted");
+
+    }
+
+    void InvalidFormSubmitted()
+    {
+        Console.WriteLine("InvalidFormSubmitted");
+    }
+}

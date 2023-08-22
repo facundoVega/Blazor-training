@@ -1,0 +1,27 @@
+﻿<div class="form-check">
+
+    @if(TaskModel.IsCompleted)
+    {
+        <input class="form-check-input" type="checkbox" id="@TaskModel.Id" disabled checked />
+
+    }
+    else
+    {
+        <input @onchange=ChangeChecked class="form-check-input" type="checkbox" id="@TaskModel.Id" />
+    }
+
+    <label class="form-check-label" for="@TaskModel.Id">
+        @TaskModel.TaskName
+    </label>
+</div>
+
+
+@code {
+    [Parameter]
+    public TaskModel TaskModel { get; set; } = new TaskModel();
+
+    void ChangeChecked()
+    {
+        TaskModel.IsCompleted = true;
+    }
+ }

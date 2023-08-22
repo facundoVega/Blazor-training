@@ -1,0 +1,52 @@
+﻿
+<div class="text-center">
+    <h1>Counter</h1>
+
+    <p role="status" class="display-1" style="color:@color"> @currentCount</p>
+
+    <button class="btn btn-outline-dark" @onclick="DecreaseCount">Decrease</button>
+    <button class="btn btn-outline-dark" @onclick="ResetCount">Reset</button>
+    <button class="btn btn-outline-dark" @onclick="IncrementCount">Increase</button>
+
+
+</div>
+
+@code {
+    private int currentCount = 0;
+    string color;
+
+    private void IncrementCount()
+    {
+        currentCount++;
+        validateColor();
+    }
+
+    private void ResetCount()
+    {
+        currentCount = 0;
+        validateColor();
+    }
+
+    private void DecreaseCount()
+    {
+        currentCount--;
+        validateColor();
+    }
+
+    void validateColor()
+    {
+        if(currentCount < 0)
+        {
+            color = "red";
+        }
+        else if (currentCount > 0)
+        {
+            color = "green";
+        }
+        else
+        {
+            color = "black";
+        }
+
+    }
+}

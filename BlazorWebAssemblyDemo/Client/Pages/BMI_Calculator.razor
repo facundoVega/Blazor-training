@@ -1,0 +1,43 @@
+﻿@page "/bmi";
+
+<h3>BMI Calculator</h3>
+
+<p>Calculate your BMI: </p>
+
+<div class="text-center" style="width:450px;">
+    <input type="text" class="form-control" placeholder="Your Height" @bind="@height" />
+    <input type="text" class="form-control mt-2" placeholder="Your Weight" @bind="@weight" />
+    <input type="text" class="form-control  mt-2" placeholder="This is your result" @bind="@result" disabled />
+    <button @onclick=CalculateBMI class="btn btn-primary mt-2">Calculate</button>
+</div>
+
+@code {
+    float? height = null;
+    float? weight = null;
+    string? result = null;
+
+    void CalculateBMI()
+    {
+        if (height != null && weight != null)
+        {
+            var bmi = weight / (height * height);
+
+            if (bmi < 18.5)
+            {
+                result = $"You are under weight - BMI: {bmi}";
+            }
+            else if(bmi >= 18.5 && bmi <= 24.9)
+            {
+                result = $"Your weight is normal - BMI: {bmi}";
+            }
+            else if (bmi >= 25 && bmi <= 29.9)
+            {
+                result = $"You are overweight - BMI: {bmi}";
+            }
+            else
+            {
+                result = $"Youhave obesity, take care of yourself - BMI: {bmi}";
+            }
+        }
+    }
+}

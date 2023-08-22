@@ -1,0 +1,91 @@
+﻿<h3>MyComponent</h3>
+
+<p>@Name</p>
+
+<button @onclick="StartCountDown">Start Count down</button>
+<p>@Count</p>
+
+@code {
+    [Parameter]
+    public string Name { get; set; }
+
+    public override async Task SetParametersAsync(ParameterView parameters)
+    {
+        if (parameters.TryGetValue<string>(nameof(Name), out var value))
+        {
+            Console.WriteLine($"SetParametersAsync - { value }");
+        }
+        else
+        {
+            Console.WriteLine($"No Value");
+        }
+
+        await  base.SetParametersAsync(parameters);
+    }
+
+    protected override void OnInitialized()
+    {
+        Console.WriteLine("OnInitialized");
+    }
+
+    protected override async Task OnInitializedAsync()
+    {
+        Console.WriteLine("OnInitializedAsync");
+        await Task.Delay(1000);
+    }
+
+    protected override void OnParametersSet()
+    {
+        Console.WriteLine("OnParametersSet");
+    }
+
+    protected override async Task OnParametersSetAsync()
+    {
+        Console.WriteLine("OnParametersSetAsync");
+        await Task.Delay(1000);
+    }
+
+    protected override void OnAfterRender(bool firstRender)
+    {
+        if (firstRender)
+        {
+            Console.WriteLine("OnAfterRender - First Time");
+        }
+        else
+        {
+            Console.WriteLine("OnAfterRender - Not First Time");
+
+        }
+    }
+
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (firstRender)
+        {
+            Console.WriteLine("OnAfterRenderAsync - First Time");
+        }
+        else
+        {
+            Console.WriteLine("OnAfterRenderAsync - Not First Time");
+        }
+        await Task.Delay(1000);
+    }
+
+    private int Count { get; set; } = 10;
+
+    void StartCountDown()
+    {
+        var timer = new Timer(new TimerCallback(_ => 
+            {
+                if (Count <= 0) return;
+                Count--;
+                this.StateHasChanged();
+
+            }), null, 1000, 1000);
+    }
+
+    protected override bool ShouldRender()
+    {
+        return true;
+    }
+}

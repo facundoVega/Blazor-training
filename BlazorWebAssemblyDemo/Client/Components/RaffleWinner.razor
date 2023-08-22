@@ -1,0 +1,39 @@
+﻿<h3>RaffleWinner</h3>
+
+<p @onclick=PickWinner>Click this text to pick a winner number</p>
+
+<p>
+    <label>
+        <input type="checkbox" @bind=saveWinner />
+        Save Winner?
+    </label>
+</p>
+
+<p>Winner number : @WinnerNumber</p>
+
+<h3>Winners history</h3>
+
+<ul>
+    @foreach(var number in Winners)
+    {
+        <li>@number</li>
+    }
+</ul>
+
+
+
+@code {
+    public int WinnerNumber { get; set; }
+    public List<int> Winners { get; set; } = new List<int>();
+    bool saveWinner;
+
+    void PickWinner()
+    {
+        WinnerNumber = new Random().Next(0, 1000);
+
+        if(saveWinner)
+        {
+            Winners.Add(WinnerNumber);
+        }
+    }
+}

@@ -1,0 +1,22 @@
+﻿<h1>Color Switcher</h1>
+
+<h2>Current Color: rgb(@red, @green, @blue)</h2>
+
+<div style="background-color:rgb(@red, @green, @blue); width:200px;height:200px;"></div>
+<div style="width:200px">
+    <label for="r">Red (0 - 255)</label>
+    <input type="range" id="r" min="0" max="255" class="form-range"  @bind="red" @bind:event="oninput" />
+    <label for="g">Green (0 - 255)</label>
+    <input type="range" id="g" min="0" max="255" class="form-range" @bind="green" @bind:event="oninput" />
+    <label for="b">Blue (0 - 255)</label>
+    <input type="range" id="b" min="0" max="255" class="form-range" @bind="blue" @bind:event="oninput" />
+
+</div>
+
+@code {
+    int red = 0;
+    int green = 0;
+    int blue = 0;
+
+
+}

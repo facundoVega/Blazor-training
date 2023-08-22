@@ -1,0 +1,26 @@
+﻿@page "/"
+
+<PageTitle>Index</PageTitle>
+
+<h1>Hello, world!</h1>
+
+Welcome to your new app.
+
+<SurveyPrompt Title="How is Blazor working for you?" />
+
+<MyComponent Name="@name"/>
+<button @onclick=ChangeName>Change Name</button>
+
+
+
+
+@code{
+    public string SiteOwner = "Jhon Doe";
+    public string TextFooter => $"Powered by {SiteOwner}";
+    string name = "";
+
+    void ChangeName()
+    {
+        name = Guid.NewGuid().ToString();
+    }
+}

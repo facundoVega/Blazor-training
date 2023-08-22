@@ -1,0 +1,22 @@
+﻿@page "/my-page"
+@page "/customer/{customerId?}"
+
+<PageTitle>My Page Demo</PageTitle>
+
+<HeadContent>="
+    <meta name="description" content="This is my custom description" />
+</HeadContent>
+
+<h3>MyPage</h3>
+<p>Displaying customer with id: @CustomerId</p>
+
+<P>My ID is: @Id</P>
+
+@code {
+    [Parameter]
+    public string? CustomerId { get; set; }
+
+    [Parameter]
+    [SupplyParameterFromQuery]
+    public string Id { get; set; }
+}

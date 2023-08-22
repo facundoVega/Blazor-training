@@ -1,0 +1,32 @@
+﻿<h2>@Title</h2>
+
+<p>@CourseDescription</p>
+
+<ul>
+    @foreach(var feature in Features)
+    {
+        <li>@feature</li>
+    }
+</ul>
+
+<p>$@Price</p>
+
+<p>@Footer</p>
+
+<p>@Banner</p>
+
+@code{
+    [Parameter]
+    public string Title { get; set; }
+    [Parameter]
+    public string CourseDescription { get; set; }
+    [Parameter]
+    public List<string> Features { get; set; }
+    [Parameter]
+    public double Price { get; set; }
+    [Parameter]
+    public string Footer { get; set; }
+    [Parameter]
+    [EditorRequired]
+    public string Banner { get; set; }
+}

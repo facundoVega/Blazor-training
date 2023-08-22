@@ -1,0 +1,28 @@
+﻿<h1>@CourseName</h1>
+
+<p>This is the best Blazor course you will find</p>
+
+<ul>
+    <li>Step by step lessons</li>
+    <li>HD Videos</li>
+    <li>Many hours of content</li>
+</ul>
+
+<RelatedCourse/>
+
+@foreach(var number in LotteryNumbers)
+{
+    <ul>
+        <li>@number</li>
+    </ul>
+}
+
+<button type="button" class="@buttonStyle"> Click me!</button>
+
+@code{
+    public string CourseName { get; set; } = "Blazor Fundamentals";
+
+    List<int> LotteryNumbers = new List<int> { 3, 11, 98, 1, 24 };
+
+    string buttonStyle = "btn btn-primary btn-lg active";
+}

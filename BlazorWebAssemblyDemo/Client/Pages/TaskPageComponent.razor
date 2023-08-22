@@ -1,0 +1,35 @@
+﻿@page "/tasks"
+
+<p class="display-4">Task Config</p>
+<div class="dropdown-divider"></div>
+<div class="input-group" style="width:500px">
+    <input class="form-control" placeholder="Pending Task" type="text" @bind=taskName />
+    <div class="input-group-append">
+        <button @onclick=AddTask class="btn btn-outline-secondary" type="button">Add Task</button>
+    </div>
+</div>
+
+<p class="display-4 mt-4">Pending Tasks</p>
+<ul class="list-group">
+
+    @foreach(var task in Tasks)
+    {
+        <TaskComponent TaskModel="@task" />
+    }
+</ul>
+
+@code {
+    string taskName;
+
+    List<TaskModel> Tasks = new List<TaskModel>();
+
+    void AddTask()
+    {
+        if (!string.IsNullOrEmpty(taskName))
+        {
+            Tasks.Add(new TaskModel { TaskName = taskName });
+            taskName = "";
+        }
+    }
+
+}
